@@ -48,7 +48,7 @@ public class TesseractTest {
     static final double MINIMUM_DESKEW_THRESHOLD = 0.05d;
     ITesseract instance;
 
-    private String datapath = path+"\\src\\java\\testdata\\";
+    private String datapath = System.getProperty("user.dir")+"\\src\\test\\java\\tessdata";
     private final String testResourcesDataPath = "test/resources/test-data";
     private final String expOCRResult = "The (quick) [brown] {fox} jumps!\nOver the $43,456.78 <lazy> #90 dog";
 
@@ -63,11 +63,7 @@ public class TesseractTest {
     @Before
     public void setUp() {
         instance = new Tesseract();
-        datapath = datapath.replace("/","\\");
-        ///instance.setDatapath(new File(datapath).getPath());
-        //instance.setDatapath(datapath);
-        //C:\Users\fitim\IdeaProjects\Tess4j\src\test\java\tessdata\eng.traineddata
-        instance.setDatapath("C:\\Users\\fitim\\IdeaProjects\\Tess4j\\src\\test\\java\\tessdata");
+        instance.setDatapath(datapath);
         path = path+"/src/"+testResourcesDataPath;
     }
 
@@ -129,19 +125,14 @@ public class TesseractTest {
 
         //Tesseract tesseract = new Tesseract();
 
-        //tesseract.setDatapath("C:\\Users\\fitim\\IdeaProjects\\Tess4j\\src\\test\\java\\tessdata");
-
         File image = new File(path+"/eurotext.png");
 
         //setGrayscale(path+"/demo.png");
 
         //File image = new File("C:\\Users\\fitim\\IdeaProjects\\Tess4j\\grayscale.jpg");
 
-
         //instance.setPageSegMode(1);
         instance.setOcrEngineMode(1);
-        //File imageFile = new File("C:\\Users\\fitim\\IdeaProjects\\Tess4j\\src\\test\\resources\\test-data\\eurotext.png");
-        //File imageFile = new File(testResourcesDataPath, "/eurotext.png");
         //String expResult = "MakeAppointment";
         String expResult = expOCRResult;
         //String result = tesseract.doOCR(imageFile);
